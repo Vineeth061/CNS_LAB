@@ -1,0 +1,28 @@
+def apply_table(inp, table):
+    res = ""
+    for i in table:
+        res += inp[i - 1]
+    return res
+
+def left_shift(data):
+    return data[1:] + data[0]
+
+key = input("Enter 10 bit key: ")
+
+p8_table = [6, 3, 7, 4, 8, 5, 10, 9]
+p10_table = [3, 5, 2, 7, 4, 10, 1, 9, 8, 6]
+
+# key generation
+temp = apply_table(key, p10_table)
+left = temp[:5]
+right = temp[5:]
+left = left_shift(left)
+right = left_shift(right)
+key1 = apply_table(left + right, p8_table)
+left = left_shift(left)
+right = left_shift(right)
+left = left_shift(left)
+right = left_shift(right)
+key2 = apply_table(left + right, p8_table)
+print("Key 1:",key1)
+print("Key 2:",key2)
